@@ -1,0 +1,37 @@
+<div class="checkout-container">
+    <div class="checkout-table-container">
+        <div class="checkout-table-header">
+            <div class="header-title product-name">Product</div>
+            <div class="header-title">Price</div>
+            <div class="header-title">Quantity</div>
+            <div class="header-title">Sub total</div>
+        </div>
+        <div class="checkout-table-body" *ngFor="let product of checkoutProducts">
+            <div class="header-body product-name">
+                <img src="{{ '/assets/img/'+ product.img }}">
+                <span>{{ product.name }}</span>
+            </div>
+            <div class="header-body">
+                {{ product.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}
+            </div>
+            <div class="header-body">
+                <div class="quantity-input">
+                    {{ product.quantity }}
+                </div>
+            </div>
+            <div class="header-body">
+                {{ (product.quantity * product.price).toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}
+            </div>
+        </div>
+    </div>
+    <div class="place-order-container">
+        <div class="checkout-detail">
+            <div class="checkout-summary">
+                <div class="total"><span>Sub Total:</span>{{ total.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}</div>
+                <div class="total"><span>Fixed Shipping Fee:</span>$5.00</div>
+                <div class="total"><span>Total Payment:</span> {{ (total + 5).toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}</div>
+                <button class="checkoutBtn" (click)="placeOrder()">Place order</button>
+            </div>
+        </div>
+    </div>
+</div>

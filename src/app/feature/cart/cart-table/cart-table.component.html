@@ -1,0 +1,35 @@
+<div class="cart-table-container">
+    <div class="cart-table-header">
+        <div class="selection"></div>
+        <div class="header-title product-name">Product</div>
+        <div class="header-title">Price</div>
+        <div class="header-title">Quantity</div>
+        <div class="header-title">Sub total</div>
+        <div class="header-title">Action</div>
+    </div>
+    <ng-container *ngFor="let productFormGroup of productsFormArray(); let i = index">
+        <div class="cart-table-body">
+            <div class="selection">
+                <input type="checkbox" (click)="isCheckProduct(i, !productFormGroup.controls['isChecked'].value)" [formControl]="productFormGroup.controls['isChecked']">
+            </div>
+            <div class="header-body product-name">
+                <img src="{{ '/assets/img/'+ productFormGroup.controls['img'].value }}">
+                <span>{{ productFormGroup.controls['name'].value }}</span>
+            </div>
+            <div class="header-body">
+                {{ productFormGroup.controls['price'].value.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}
+            </div>
+            <div class="header-body">
+                <div class="quantity-input">
+                    <button (click)="plusMinus(i, 'minus', productFormGroup.controls['quantity'].value)">-</button>
+                    <input type="number" min="1" [formControl]="productFormGroup.controls['quantity']">
+                    <button (click)="plusMinus(i, 'plus', productFormGroup.controls['quantity'].value)">+</button>
+                </div>
+            </div>
+            <div class="header-body">
+                {{ (productFormGroup.controls['price'].value * productFormGroup.controls['quantity'].value).toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}
+            </div>
+            <div class="header-body delete" (click)="onClickRemoveProduct(i)">Remove</div>
+        </div>
+    </ng-container>
+</div>

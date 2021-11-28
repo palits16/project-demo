@@ -1,0 +1,17 @@
+<div class="product-item">
+    <div class="top-body"><img src="{{ '/assets/img/'+ product.img }}"></div>
+    <div class="bottom-body">
+        <div class="description">
+            <span>{{ product.description }}</span>
+        </div>
+        <div class="product-name">
+            <span>{{ product.name }}</span>
+        </div>
+        <div class="price">
+            <span>{{ product.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}</span>
+        </div>
+    </div>
+</div>
+<div class="add-to-cart">
+    <button (click)="addToCart(product)">Add to cart</button>
+</div>

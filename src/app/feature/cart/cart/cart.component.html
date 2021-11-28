@@ -1,0 +1,11 @@
+<div class="cart-container">
+    <app-cart-table [formGroup]="formGroup"></app-cart-table>
+    <div class="checkout-container">
+        <div class="checkout-detail">
+            <div class="checkout-summary">
+                <div class="total">Total: {{ total.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}</div>
+                <button class="checkoutBtn" [ngClass]="{'disabled': !hasChekoutProducts}" [disabled]="!hasChekoutProducts" (click)="checkout()">Checkout</button>
+            </div>
+        </div>
+    </div>
+</div>

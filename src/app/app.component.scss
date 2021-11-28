@@ -1,0 +1,27 @@
+.header {
+  height: 85px;
+  background-color: #283b8d;
+
+  .header-content {
+    display: flex;
+    flex-direction: row-reverse;
+    height: inherit;
+    .cart-btn {
+      display: flex;
+      padding: 20px;
+      align-items: center;
+
+      a {
+        width: 70px;
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+
+        &.disabled {
+          color: gray;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
