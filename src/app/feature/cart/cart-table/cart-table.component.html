@@ -22,7 +22,7 @@
             <div class="header-body">
                 <div class="quantity-input">
                     <button (click)="plusMinus(i, 'minus', productFormGroup.controls['quantity'].value)">-</button>
-                    <input type="number" min="1" [formControl]="productFormGroup.controls['quantity']">
+                    <input type="number" (change)="plusMinus(i, 'override', productFormGroup.controls['quantity'].value)" min="1" [formControl]="productFormGroup.controls['quantity']">
                     <button (click)="plusMinus(i, 'plus', productFormGroup.controls['quantity'].value)">+</button>
                 </div>
             </div>

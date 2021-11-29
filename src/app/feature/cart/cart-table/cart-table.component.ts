@@ -18,13 +18,20 @@ export class CartTableComponent implements OnInit {
     return <Array<FormGroup>>(<FormArray>this.formGroup.get('products')).controls;
   }
 
-  plusMinus(index: number, action: 'minus'|'plus', currentValue: number) {
-    if (action === 'minus' && currentValue == 1) { return; }
+  plusMinus(index: number, action: 'minus'|'plus'| 'override', currentValue?: number) {
     let productsFormArray: FormArray = <FormArray>(this.formGroup.get('products'));
     const productFormGroup = productsFormArray.controls[index];
-    const newValue = (action === 'plus') ? currentValue+= 1 : currentValue -= 1;
-    productFormGroup.get('quantity').setValue(newValue);
-    this.cartUtilityService.updateQuantityProductToCart(productFormGroup.value, newValue);
+    if ((action === 'minus' || action === 'override') && currentValue <= 1) {
+      productFormGroup.get('quantity').setValue(1);
+      return;
+    }
+    if (action === 'override') {
+      this.cartUtilityService.updateQuantityProductToCart(productFormGroup.value, productFormGroup.get('quantity').value);
+    } else {
+      const newValue = (action === 'plus') ? currentValue+= 1 : currentValue -= 1;
+      productFormGroup.get('quantity').setValue(newValue);
+      this.cartUtilityService.updateQuantityProductToCart(productFormGroup.value, newValue);
+    }
   }
 
   onClickRemoveProduct(index: number): void {
