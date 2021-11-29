@@ -24,20 +24,6 @@ export class AppComponent implements OnInit {
     this.cartUtilityService.getCart().subscribe(cartValue => {
       this.cartProductList = [...cartValue];
     });
-    this.cartProductList.forEach((cartValue) => {
-      if (typeof cartValue == 'object') {
-        this.addProductToCart(cartValue);
-      }
-    });
-  }
-
-  addProductToCart(product) {
-    const productExistInCart = this.cartProductList.find(({ name }) => name === product.name);
-    if (!productExistInCart) {
-      this.cartProductList.push({ ...product, quantity: 1 });
-      return;
-    }
-    productExistInCart.quantity += 1;
   }
 
   get total(): number {

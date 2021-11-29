@@ -60,8 +60,9 @@ export class CartComponent implements OnInit {
   get hasChekoutProducts(): boolean {
     const selectedProducts = this.formGroup.value.products;
     const checkoutProducts = selectedProducts.filter(({ isChecked }) => isChecked);
+    const checkQuantity = selectedProducts.filter(({ quantity }) => quantity > 0);
 
-    return checkoutProducts.length > 0;
+    return checkoutProducts.length > 0 && checkQuantity.length > 0;
   }
 
 }
